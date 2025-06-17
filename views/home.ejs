@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Blog Home</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-100 text-gray-900 font-sans">
+
+
+  <header class="bg-white shadow-md px-6 py-4 flex items-center justify-between flex-wrap gap-y-4">
+    <h1 class="text-xl sm:text-2xl font-bold text-blue-600">All Blog Posts</h1>
+
+    <div class="space-x-4">
+      <% if (session && session.userId) { %>
+        <a href="/profile" class="text-blue-600 hover:underline">My Profile</a>
+        <a href="/create" class="bg-blue-600 text-white px-3 py-1 rounded hover:bg-blue-700">➕ Create New Post</a>
+        <form action="/logout" method="get" class="inline">
+          <button type="submit" class="bg-red-500 text-white px-3 py-1 rounded hover:bg-red-600">Logout</button>
+        </form>
+      <% } else { %>
+        <a href="/login" class="text-blue-600 hover:underline">Login</a>
+        <a href="/register" class="bg-green-600 text-white px-3 py-1 rounded hover:bg-green-700">Register</a>
+      <% } %>
+    </div>
+  </header>
+
+
+  <div class="max-w-4xl mx-auto mt-6 px-4 flex justify-end">
+    <form method="GET" action="/" class="flex items-center gap-2">
+      <label for="sort" class="font-medium">Sort by:</label>
+      <select name="sort" id="sort" onchange="this.form.submit()" class="border px-2 py-1 rounded w-full sm:w-auto">
+        <option value="recent" <%= sort === 'recent' ? 'selected' : '' %>>Most Recent</option>
+        <option value="liked" <%= sort === 'liked' ? 'selected' : '' %>>Most Liked</option>
+        <option value="oldest" <%= sort === 'oldest' ? 'selected' : '' %>>Oldest</option>
+      </select>
+    </form>
+  </div>
+
+
+  <main class="max-w-4xl mx-auto mt-4 px-4">
+    <% if (posts.length === 0) { %>
+      <p class="text-center text-gray-500">No posts yet. Be the first to create one!</p>
+    <% } else { %>
+      <% posts.forEach(post => { %>
+        <div class="bg-white shadow-md rounded-lg p-4 sm:p-6 mb-6 text-sm sm:text-base">
+          <h2 class="text-xl font-semibold mb-2 text-gray-800"><%= post.title %></h2>
+          <p class="text-gray-700 mb-2">
+            <%= post.preview %>...
+            <a href="/post/<%= post._id %>" class="text-blue-500 hover:underline">Read More</a>
+          </p>
+          <p class="text-sm text-gray-500">
+            By <%= post.author.username %> |
+            <%= new Date(post.createdAt).toDateString() %> |
+            ❤️ <%= post.likes %> likes
+          </p>
+        </div>
+      <% }) %>
+    <% } %>
+  </main>
+
+</body>
+</html>
+
+
+
+
+

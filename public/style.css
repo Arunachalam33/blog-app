@@ -1,0 +1,31 @@
+body {
+    font-family: Arial, sans-serif;
+    background: #f4f4f4;
+    margin: 0;
+    padding: 0;
+}
+
+header {
+    background: #333;
+    color: white;
+    padding: 1rem;
+    text-align: center;
+}
+
+main {
+    max-width: 800px;
+    margin: 20px auto;
+    padding: 1rem;
+    background: white;
+    border-radius: 5px;
+}
+
+.post {
+    border-bottom: 1px solid #ddd;
+    padding: 1rem 0;
+}
+
+.post h2 {
+    margin: 0;
+}
+  
