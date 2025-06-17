@@ -38,7 +38,7 @@ app.use(session({
     secret: process.env.SESSION_SECRET,
     resave: false,
     saveUninitialized: false,
-    store: MongoStore.create({ mongoUrl: "mongodb://127.0.0.1:27017/blogApp" })
+    store: MongoStore.create({ mongoUrl: process.env.MONGO_URI })
 }));
 
 app.use(express.json()); 
