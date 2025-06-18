@@ -1,15 +1,20 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Profile</title>
   <script src="https://cdn.tailwindcss.com"></script>
 </head>
-<body class="bg-gray-100 font-sans min-h-screen p-6">
+<body class="bg-gray-100 font-sans min-h-screen p-4 sm:p-6">
 
-  <div class="max-w-4xl mx-auto bg-white shadow-md rounded-lg p-6 mt-8">
-    <h1 class="text-3xl font-bold text-blue-600 mb-2 text-center">Welcome to Your Profile</h1>
-    <h2 class="text-xl font-semibold text-gray-800 mb-6 text-center"><%= user.username %>'s Posts</h2>
+  <div class="max-w-4xl mx-auto bg-white shadow-md rounded-lg p-4 sm:p-6 mt-8">
+    <h1 class="text-2xl sm:text-3xl font-bold text-blue-600 mb-2 text-center">
+      Welcome to Your Profile
+    </h1>
+    <h2 class="text-lg sm:text-xl font-semibold text-gray-800 mb-6 text-center">
+      <%= user.username %>'s Posts
+    </h2>
 
     <% if (posts.length === 0) { %>
       <p class="text-center text-gray-600">No blog posts yet.</p>
@@ -17,20 +22,27 @@
       <div class="space-y-6">
         <% posts.forEach(post => { %>
           <div class="bg-gray-50 p-4 rounded-md shadow-sm">
-            <h3 class="text-xl font-semibold text-blue-700 mb-2">
-              <a href="/post/<%= post._id %>" class="hover:underline"><%= post.title %></a>
+            <h3 class="text-lg sm:text-xl font-semibold text-blue-700 mb-2 break-words">
+              <a href="/post/<%= post._id %>" class="hover:underline">
+                <%= post.title %>
+              </a>
             </h3>
-            <p class="text-gray-700 mb-2"><%= post.plainPreview %>...</p>
-            <p class="text-sm text-gray-500 mb-4">Created on <%= post.createdAt.toDateString() %></p>
+            <p class="text-gray-700 mb-2 text-sm sm:text-base"><%= post.plainPreview %>...</p>
+            <p class="text-xs sm:text-sm text-gray-500 mb-4">Created on <%= post.createdAt.toDateString() %></p>
 
-            <div class="flex items-center space-x-4">
+            <div class="flex flex-col sm:flex-row sm:items-center sm:space-x-4 gap-2 sm:gap-0">
               <a 
                 href="/edit/<%= post._id %>" 
-                class="px-3 py-1 bg-yellow-400 text-white rounded hover:bg-yellow-500 transition"
+                class="px-3 py-1 bg-yellow-400 text-white rounded hover:bg-yellow-500 transition text-center"
               >
                 ✏️ Edit
               </a>
-              <form action="/delete/<%= post._id %>" method="POST" onsubmit="return confirm('Delete this post?')">
+              <form 
+                action="/delete/<%= post._id %>" 
+                method="POST" 
+                onsubmit="return confirm('Delete this post?')"
+                class="text-center"
+              >
                 <button 
                   type="submit" 
                   class="px-3 py-1 bg-red-500 text-white rounded hover:bg-red-600 transition"
@@ -45,9 +57,10 @@
     <% } %>
 
     <div class="mt-8 text-center">
-      <a href="/" class="text-blue-600 hover:underline text-lg">⬅ Back to Home</a>
+      <a href="/" class="text-blue-600 hover:underline text-sm sm:text-lg">⬅ Back to Home</a>
     </div>
   </div>
 
 </body>
 </html>
+

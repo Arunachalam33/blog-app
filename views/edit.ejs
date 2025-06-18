@@ -1,24 +1,24 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Edit Post</title>
-  <link href="https://cdn.quilljs.com/1.3.6/quill.snow.css" rel="stylesheet">
+  <link href="https://cdn.quilljs.com/1.3.6/quill.snow.css" rel="stylesheet" />
   <script src="https://cdn.tailwindcss.com"></script>
-
   <style>
     #editor-container {
       height: 300px;
     }
   </style>
 </head>
-<body class="bg-gray-100 font-sans min-h-screen p-6">
+<body class="bg-gray-100 font-sans min-h-screen p-4 sm:p-6">
 
-  <div class="max-w-3xl mx-auto bg-white shadow-md rounded-lg p-8 mt-8">
-    <h1 class="text-2xl font-bold text-blue-600 mb-6 text-center">✏️ Edit Post</h1>
+  <div class="max-w-3xl mx-auto bg-white shadow-md rounded-lg p-4 sm:p-8 mt-6 sm:mt-8">
+    <h1 class="text-xl sm:text-2xl font-bold text-blue-600 mb-6 text-center">✏️ Edit Post</h1>
 
     <form action="/edit/<%= post._id %>" method="POST" onsubmit="submitPost()" class="space-y-6">
-
+      <!-- Post Title -->
       <div>
         <label for="title" class="block text-gray-700 font-semibold mb-1">Post Title</label>
         <input 
@@ -27,32 +27,35 @@
           id="title"
           value="<%= post.title %>" 
           required
-          class="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
-        >
+          class="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 text-sm sm:text-base"
+        />
       </div>
 
+      <!-- Quill Editor -->
       <div>
         <label for="editor-container" class="block text-gray-700 font-semibold mb-1">Post Content</label>
         <div id="editor-container" class="bg-white border border-gray-300 rounded-md"></div>
         <input type="hidden" name="content" id="hidden-content">
       </div>
 
+      <!-- Submit Button -->
       <div class="text-center">
         <button 
           type="submit"
-          class="bg-blue-600 text-white px-6 py-2 rounded hover:bg-blue-700 transition"
+          class="bg-blue-600 text-white px-6 py-2 rounded hover:bg-blue-700 transition text-sm sm:text-base"
         >
-        Update
+          Update
         </button>
       </div>
     </form>
 
+    <!-- Back Link -->
     <div class="mt-6 text-center">
-      <a href="/" class="text-blue-600 hover:underline text-lg">⬅ Back to Home</a>
+      <a href="/" class="text-blue-600 hover:underline text-sm sm:text-lg">⬅ Back to Home</a>
     </div>
   </div>
 
-
+  <!-- Quill Script -->
   <script src="https://cdn.quilljs.com/1.3.6/quill.js"></script>
   <script>
     const quill = new Quill('#editor-container', {
@@ -78,6 +81,7 @@
   </script>
 </body>
 </html>
+
 
 
 
